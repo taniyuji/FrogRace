@@ -52,4 +52,12 @@ public class PlayerComponentsProvider : MonoBehaviour
     {
         get { return _jumpLineSimulator; }
     }
+
+    [SerializeField]
+    private JoyStickInformationProvider _joyStickInformationProvider;
+
+    public JoyStickInformationProvider joyStickInformationProvider
+    {
+        get { return _joyStickInformationProvider; }
+    }
 }

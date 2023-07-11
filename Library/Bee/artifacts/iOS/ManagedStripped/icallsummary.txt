@@ -884,7 +884,6 @@ UnityEngine.TrailRenderer::set_time
 UnityEngine.Transform::IsChildOf
 UnityEngine.Transform::get_childCount
 UnityEngine.Transform::InverseTransformPoint_Injected
-UnityEngine.Transform::RotateAroundInternal_Injected
 UnityEngine.Transform::SetAsFirstSibling
 UnityEngine.Transform::SetParent
 UnityEngine.Transform::TransformDirection_Injected

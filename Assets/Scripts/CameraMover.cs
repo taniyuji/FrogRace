@@ -44,7 +44,7 @@ public class CameraMover : MonoBehaviour
             {
                 state = States.Following;
             }
-            else if (i == PlayerStatesController.States.Running)
+            else if (i == PlayerStatesController.States.Idle)
             {
                 isAdjustRote = true;
             }
@@ -59,11 +59,12 @@ public class CameraMover : MonoBehaviour
 
     private void Update()
     {
-        RotateBehavior();
+        //RotateBehavior();
         FollowBehavior();
-        AdjustRote();
+        //AdjustRote();
     }
 
+    /*
     private void RotateBehavior()
     {
         if (state != States.Rotating) return;
@@ -76,6 +77,7 @@ public class CameraMover : MonoBehaviour
 
         playerBeforeYRote = componentsProvider.transform.localEulerAngles.y;
     }
+    */
 
     private void FollowBehavior()
     {
@@ -86,13 +88,14 @@ public class CameraMover : MonoBehaviour
         var targetPosition = transform.position + playerPosDif;
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, movesmoothness);
-        
+
         //transform.position += playerPosDif;
 
         beforePlayerPosition = componentsProvider.transform.position;
-        
+
     }
 
+    /*
     private void AdjustRote()
     {
         if (!isAdjustRote) return;
@@ -114,4 +117,5 @@ public class CameraMover : MonoBehaviour
 
         playerBeforeYRote = componentsProvider.transform.localEulerAngles.y;
     }
+    */
 }

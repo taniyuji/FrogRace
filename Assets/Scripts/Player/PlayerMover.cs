@@ -6,35 +6,13 @@ using System.Collections;
 
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField]
-    private Joystick joystick;
-
-    [SerializeField]
-    private float moveSpeed;
-
-    [SerializeField]
-    private float runningJudgeAmount = 0.2f;
-
-    [SerializeField]
-    private float aimingJumpJudgeAmount;
-
-    [SerializeField]
-    private float rotationSpeed = 1f;
-
-    [SerializeField]
-    private Transform firstStageTopTransform;
-
-    public Vector3 lookDirection { get; private set; }
-
     private PlayerComponentsProvider playerComponentsProvider;
 
     private PlayerStatesController statesController;
 
-    private Vector3 firstInput;   
+    private JoyStickInformationProvider joyStickInformationProvider;
 
-    private bool canJudgeLand = false;
-
-    private float beforeJoyStickVerticalValue;
+    private bool isAbleToJudgeLand = false;
 
     private void Awake()
     {
@@ -45,6 +23,8 @@ public class PlayerMover : MonoBehaviour
     void Start()
     {
         statesController = playerComponentsProvider.playerStatesController;
+
+        joyStickInformationProvider = playerComponentsProvider.joyStickInformationProvider;
 
         statesController.stateChanged.Subscribe(i =>
         {
@@ -62,66 +42,8 @@ public class PlayerMover : MonoBehaviour
                             = RigidbodyConstraints.FreezeRotationX
                              | RigidbodyConstraints.FreezeRotationZ;
             }
-                
-        });        
-    }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (statesController.state != PlayerStatesController.States.Running) return;        
-
-        if(transform.localEulerAngles != lookDirection)
-            transform.DORotate(lookDirection, 0.1f);
-
-        //Debug.Log("Running");
-
-        var moveAmount = new Vector3(0, playerComponentsProvider.rigidBody.velocity.y, 0);
-
-        if (Mathf.Abs(transform.forward.normalized.z) >= 0.5f)
-        {
-            if (transform.forward.normalized.z > 0)
-            {
-                if (Mathf.Abs(joystick.Horizontal) > runningJudgeAmount)
-                    moveAmount.x = joystick.Horizontal > 0 ? moveSpeed : -moveSpeed;
-                else
-                    moveAmount.x = 0;
-
-                moveAmount.z = moveSpeed;
-            }
-            else
-            {
-                if (Mathf.Abs(joystick.Horizontal) > runningJudgeAmount)
-                    moveAmount.x = joystick.Horizontal > 0 ? -moveSpeed : moveSpeed;
-                else
-                    moveAmount.x = 0;
-
-                moveAmount.z = -moveSpeed;
-            }
-        }
-        else
-        {
-            if (transform.forward.normalized.x > 0)
-            {
-                if (Mathf.Abs(joystick.Horizontal) > runningJudgeAmount)
-                    moveAmount.z = joystick.Horizontal > 0 ? -moveSpeed : moveSpeed;
-                else
-                    moveAmount.z = 0;
-
-                moveAmount.x = moveSpeed;
-            }
-            else
-            {
-                if (Mathf.Abs(joystick.Horizontal) > runningJudgeAmount)
-                    moveAmount.z = joystick.Horizontal > 0 ? moveSpeed : -moveSpeed;
-                else
-                    moveAmount.z = 0;
-
-                moveAmount.x = -moveSpeed;
-            }
-        }
-
-        playerComponentsProvider.rigidBody.velocity = moveAmount;
+        });
     }
 
     private void Update()
@@ -131,7 +53,12 @@ public class PlayerMover : MonoBehaviour
         //Debug.Log(transform.forward.normalized);
         //Debug.Log(statesController.state);
         if (Input.GetMouseButtonDown(0))
-            firstInput = Input.mousePosition;
+        {
+            statesController.ChangeState(PlayerStatesController.States.AimingJump);
+            joyStickInformationProvider.firstInput = Input.mousePosition;
+        }
+
+        if (joyStickInformationProvider.firstInput == null) return;
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -146,45 +73,42 @@ public class PlayerMover : MonoBehaviour
             }
         }
 
-        if (joystick.Vertical < aimingJumpJudgeAmount
-                && statesController.state != PlayerStatesController.States.AimingJump)            
-        {
-            statesController.ChangeState(PlayerStatesController.States.AimingJump);         
-            //Debug.Log("GoAiming");
-        }
-
         ChangeRotation();
     }
 
     private IEnumerator delayJudgeLand()
     {
-        canJudgeLand = false;
+        isAbleToJudgeLand = false;
 
         yield return new WaitForSeconds(0.2f);
 
-        canJudgeLand = true;
+        isAbleToJudgeLand = true;
     }
 
     private void ChangeRotation()
     {
-        if (Input.mousePosition == firstInput) return;
+        if (Input.mousePosition == joyStickInformationProvider.beforeInput)
+        {
+            return;
+        }
 
         if (statesController.state
             != PlayerStatesController.States.AimingJump)
             return;
 
-        if (joystick.Vertical > 0)
-        {            
-            return;
-        }            
+        var roteDirection = (Input.mousePosition - joyStickInformationProvider.firstInput.Value);
 
-        var roteDirection = firstInput - Input.mousePosition;
+        var angle = Mathf.Atan2(roteDirection.x, roteDirection.y) * Mathf.Rad2Deg;
 
-        roteDirection = new Vector3(roteDirection.x, 0, roteDirection.y);                                                
+        if (angle < 0) angle += 360;
 
-        var targetRotation = Quaternion.LookRotation(roteDirection) * Quaternion.Euler(lookDirection);
-        
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);        
+        var rotateAmount = new Vector3(0, angle, 0);
+
+        //Debug.Log(angle);
+
+        transform.localEulerAngles = rotateAmount;
+
+        joyStickInformationProvider.beforeInput = Input.mousePosition;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -194,40 +118,10 @@ public class PlayerMover : MonoBehaviour
         if (statesController.state
                 != PlayerStatesController.States.Jumping) return;
 
-        if (!canJudgeLand) return;
+        if (!isAbleToJudgeLand) return;
 
-        if (statesController.state
-                != PlayerStatesController.States.Running)
-        {
-            var stageTopPosition = collision.transform.parent.position;
-
-            playerComponentsProvider.rigidBody.velocity = Vector3.zero;
-
-            var fixedStageTopPosition = stageTopPosition;
-
-            var distance = stageTopPosition - transform.position;
-
-            if(Mathf.Abs(distance.x) > Mathf.Abs(distance.z))
-            {
-                if (distance.x > 0)
-                    lookDirection = new Vector3(0, 90, 0);
-                else
-                    lookDirection = new Vector3(0, -90, 0);
-            }
-            else
-            {
-                if (distance.z > 0)
-                    lookDirection = Vector3.zero;
-                else
-                    lookDirection = new Vector3(0, 180, 0);
-            }
-
-            transform.DORotate(lookDirection, 0.1f);
-
-            statesController.ChangeState(PlayerStatesController.States.Running);
-
-            //Debug.Log(collision.transform.parent.name);
-        }
+        statesController.ChangeState(PlayerStatesController.States.Idle);
+        joyStickInformationProvider.firstInput = null;
     }
 }
 

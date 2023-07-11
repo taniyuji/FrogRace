@@ -16,13 +16,13 @@ public class PlayerStatesController : MonoBehaviour
     [HideInInspector]
     public enum States
     {
-        Running,
+        Idle,
         AimingJump,
         Jumping,
         GameOver,
     }
 
-    public States state { get; private set; } = States.Running;
+    public States state { get; private set; } = States.AimingJump;
 
     public void ChangeState(States targetState)
     {

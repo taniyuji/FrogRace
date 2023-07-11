@@ -14,58 +14,79 @@ public class JumpTargetController : MonoBehaviour
 
     private PlayerComponentsProvider componentsProvider;
 
-    private float moveDistanceCounter = 0;
+    private JoyStickInformationProvider joyStickInformationProvider;
+
+    private float beforeDistance = 0;
 
     private bool isMinus = false;
+
+    private Vector3 beforeJumpCenterPosition;
 
     private void Awake()
     {
         componentsProvider = GetComponent<PlayerComponentsProvider>();
     }
-    
+
     void Start()
     {
+        joyStickInformationProvider = componentsProvider.joyStickInformationProvider;
+
         componentsProvider.playerStatesController.stateChanged.Subscribe(i =>
         {
             if (componentsProvider.playerStatesController.state
                    == PlayerStatesController.States.AimingJump)
             {
+                jumpTargetTransform.parent = transform;
+
                 jumpTargetTransform.position = new Vector3(transform.position.x,
                                                              jumpTargetTransform.position.y,
                                                              transform.position.z);
                 isMinus = false;
-                moveDistanceCounter = 0;
+                beforeDistance = 0;
 
                 jumpTargetTransform.gameObject.SetActive(true);
+
+                beforeJumpCenterPosition = transform.position;
             }
-            else
+            else if (componentsProvider.playerStatesController.state
+                        == PlayerStatesController.States.Jumping)
+            {
+                jumpTargetTransform.parent = null;
+            }
+            else if (componentsProvider.playerStatesController.state
+                        == PlayerStatesController.States.Idle)
             {
                 jumpTargetTransform.gameObject.SetActive(false);
-                moveDistanceCounter = 0;
+                beforeDistance = 0;
             }
         });
 
         jumpTargetTransform.gameObject.SetActive(false);
     }
 
-    
+
     void Update()
     {
-        if (moveDistanceCounter > maxDistance)
+        var nowDistance = joyStickInformationProvider.GetCenterToNowPointDistance();
+
+        if (beforeDistance == nowDistance)
         {
-            moveDistanceCounter = 0;
-
-            isMinus = !isMinus;
-
             return;
         }
 
-        if(componentsProvider.playerStatesController.state != PlayerStatesController.States.AimingJump) return;
-        
-        var fixedMoveSpeed = isMinus ? -moveSpeed * Time.deltaTime : moveSpeed * Time.deltaTime;
+        isMinus = beforeDistance > nowDistance;
 
-        jumpTargetTransform.position += transform.forward.normalized * fixedMoveSpeed;
+        var fixedMoveSpeed = isMinus ? moveSpeed * (beforeDistance - nowDistance) : moveSpeed * nowDistance;
 
-        moveDistanceCounter += Mathf.Abs(fixedMoveSpeed);            
+        var direction = transform.forward;
+
+        if (!isMinus)
+            jumpTargetTransform.position = beforeJumpCenterPosition + direction * fixedMoveSpeed;
+        else
+            jumpTargetTransform.position -= direction * fixedMoveSpeed;
+
+        beforeDistance = nowDistance;
+
+        //Debug.Log("centerToNow:" + componentsProvider.joyStickInformationProvider.GetCenterToNowPointDistance());
     }
 }

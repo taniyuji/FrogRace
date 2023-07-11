@@ -2,10 +2,8 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - CameraMover
-    - EnemyAnimationController
-    - EnemyMover
-    - EnemyStatesController
     - FloatingJoystick
+    - JoyStickInformationProvider
     - JumpLineSimulator
     - JumpTargetController
     - PlayerAnimationController
@@ -19,6 +17,8 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachinePipeline
     DOTween.dll:
     - DG.Tweening.Core.DOTweenSettings
+    Unity.Recorder.Editor.dll:
+    - UnityEditor.Recorder.RecorderPreferencesSettings
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro:
@@ -103,17 +103,9 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
-    - Class: 74
-      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
-      Script: {instanceID: 0}
-    - Class: 90
-      Script: {instanceID: 0}
-    - Class: 91
-      Script: {instanceID: 0}
-    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -150,8 +142,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 20654}
     - Class: 114
-      Script: {instanceID: 20784}
-    - Class: 114
       Script: {instanceID: 20910}
     - Class: 114
       Script: {instanceID: 21294}
@@ -168,9 +158,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 22674}
     - Class: 114
-      Script: {instanceID: 22692}
-    - Class: 114
-      Script: {instanceID: 23274}
+      Script: {instanceID: 25830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -178,10 +166,6 @@ ScriptsOnlyBuild:
     - Class: 134
       Script: {instanceID: 0}
     - Class: 135
-      Script: {instanceID: 0}
-    - Class: 136
-      Script: {instanceID: 0}
-    - Class: 137
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -310,7 +294,7 @@ ScriptsOnlyBuild:
     className: CinemachineCollider
   - hash:
       serializedVersion: 2
-      Hash: ddbf32ea39bd66ceba267a2b0674b17a
+      Hash: 3a14a4bf7784de8ae786b48a0d12772b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: FixedJoystick
@@ -328,7 +312,7 @@ ScriptsOnlyBuild:
     className: UnityOnTriggerEnterMessageListener
   - hash:
       serializedVersion: 2
-      Hash: b5a5f8ea0ffdd30ae1a4135162f8200d
+      Hash: 667b0ee4f1569d276db35f111a91729b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: VariableJoystick
@@ -448,7 +432,7 @@ ScriptsOnlyBuild:
     className: UnityMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 0ec27b48cca65654bc6c4f5128215d97
+      Hash: 019e30dbb8cc166f9acb9a36d72915d3
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: PlayerComponentsProvider
@@ -1000,7 +984,7 @@ ScriptsOnlyBuild:
     className: UnityOnTransformChildrenChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 2b89a577309ee23972c502ecef0aac43
+      Hash: 9fb19caef43e2f0dc0dcb70d1322bed8
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: DynamicJoystick
@@ -1066,7 +1050,7 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: ddbf32ea39bd66ceba267a2b0674b17a
+      Hash: 3a14a4bf7784de8ae786b48a0d12772b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Joystick
@@ -1222,7 +1206,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 96bb1dc1eacb1be2ce2ffcb6d22a365f
+      Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: PlayerMover
@@ -1462,7 +1446,7 @@ ScriptsOnlyBuild:
     className: ObservableAnimatorTrigger
   - hash:
       serializedVersion: 2
-      Hash: ddbf32ea39bd66ceba267a2b0674b17a
+      Hash: 3a14a4bf7784de8ae786b48a0d12772b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: FloatingJoystick
@@ -1664,7 +1648,13 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 7c09c82c24509298dec6ea9879acb4ca
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: JoyStickInformationProvider
   platform: 9
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: /Volumes/mac/Unity/iOSBuilds
+  playerPath: /Volumes/mac/Unity/iOSBuilds/FrogRace

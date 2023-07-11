@@ -33,7 +33,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         componentsProvider.playerStatesController.stateChanged.Subscribe(i =>
         {            
-            if(i == PlayerStatesController.States.Running)
+            if(i == PlayerStatesController.States.Idle)
             {
                 Debug.Log("DrribleAgain");
 
@@ -56,8 +56,6 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void playDribbleAnimation()
     {               
-        Debug.Log(meshRenderer.transform.localPosition);
-
         dribbleTweener = (meshRenderer.transform
                                .DOLocalMove(new Vector3(0, dribbleYPosition, 0), boundSpeed)
                                .SetLoops(-1, LoopType.Yoyo))

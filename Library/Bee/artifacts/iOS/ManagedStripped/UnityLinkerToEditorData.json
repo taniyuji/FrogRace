@@ -12,25 +12,19 @@
           },
           {
             "name": "AnimationClip",
-            "scenes": [
-              "Assets/Scenes/SampleScene.unity"
-            ],
+            "scenes": [],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "Animator",
-            "scenes": [
-              "Assets/Scenes/SampleScene.unity"
-            ],
+            "scenes": [],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "AnimatorController",
-            "scenes": [
-              "Assets/Scenes/SampleScene.unity"
-            ],
+            "scenes": [],
             "dependencyType": 1,
             "icon": null
           },
@@ -42,9 +36,7 @@
           },
           {
             "name": "Avatar",
-            "scenes": [
-              "Assets/Scenes/SampleScene.unity"
-            ],
+            "scenes": [],
             "dependencyType": 0,
             "icon": null
           },
@@ -57,7 +49,7 @@
           {
             "name": "Motion",
             "scenes": [],
-            "dependencyType": 1,
+            "dependencyType": 0,
             "icon": null
           },
           {
@@ -442,14 +434,6 @@
             "icon": null
           },
           {
-            "name": "SkinnedMeshRenderer",
-            "scenes": [
-              "Assets/Scenes/SampleScene.unity"
-            ],
-            "dependencyType": 0,
-            "icon": null
-          },
-          {
             "name": "SortingGroup",
             "scenes": [],
             "dependencyType": 0,
@@ -744,14 +728,6 @@
         "dependencies": [
           {
             "name": "BoxCollider",
-            "scenes": [
-              "Assets/Scenes/SampleScene.unity"
-            ],
-            "dependencyType": 0,
-            "icon": null
-          },
-          {
-            "name": "CapsuleCollider",
             "scenes": [
               "Assets/Scenes/SampleScene.unity"
             ],

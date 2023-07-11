@@ -3185,6 +3185,7 @@ GameObject:
   - component: {fileID: 306256209}
   - component: {fileID: 306256211}
   - component: {fileID: 306256212}
+  - component: {fileID: 306256213}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3231,12 +3232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81b8601078bb40c5bbf1ac1e14df722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 2088976696}
-  moveSpeed: 0
-  runningJudgeAmount: 0.2
-  aimingJumpJudgeAmount: -0.3
-  rotationSpeed: 0.1
-  firstStageTopTransform: {fileID: 2895319107809333397}
 --- !u!114 &306256203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3267,6 +3262,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _meshRenderer: {fileID: 852865404}
   _jumpLineSimulator: {fileID: 306256207}
+  _joyStickInformationProvider: {fileID: 306256213}
 --- !u!4 &306256205
 Transform:
   m_ObjectHideFlags: 0
@@ -3316,7 +3312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpTargetTransform: {fileID: 38800205}
-  moveSpeed: 20
+  moveSpeed: 75
   maxDistance: 40
 --- !u!114 &306256209
 MonoBehaviour:
@@ -3367,6 +3363,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.98
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &306256213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306256200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d396a5b1013414a820d76ddb13e64c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 2088976696}
+  beforeInput: {x: 0, y: 0, z: 0}
 --- !u!1 &315313292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7771,15 +7781,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18611395, y: -0, z: -0, w: 0.98252815}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.18228635, y: -0, z: -0, w: 0.98324555}
+  m_LocalPosition: {x: 0, y: 12.2, z: -15.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 924194137}
   m_Father: {fileID: 526526656}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 21.452, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.006, y: 0, z: 0}
 --- !u!1 &963440405
 GameObject:
   m_ObjectHideFlags: 0
@@ -14688,6 +14698,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8170153791961219457, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8170153791961219459, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
       propertyPath: m_Color.b
       value: 0.5849056
@@ -15359,7 +15373,7 @@ Transform:
   m_GameObject: {fileID: 2340532991632643604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.0799668, y: 0.8266406, z: -79.8}
-  m_LocalScale: {x: 20, y: 1, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2895319107809333397}
