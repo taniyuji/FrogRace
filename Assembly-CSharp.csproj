@@ -51,6 +51,7 @@
      <Compile Include="Assets/Scripts/ResetButton.cs" />
      <Compile Include="Assets/Scripts/Player/PlayerAnimationController.cs" />
      <Compile Include="Assets/Scripts/Player/JumpTargetController.cs" />
+     <Compile Include="Assets/Scripts/GameManager.cs" />
      <Compile Include="Assets/Scripts/Enemy/EnemyMover.cs" />
      <Compile Include="Assets/Scripts/CameraMover.cs" />
      <Compile Include="Assets/Scripts/Player/JoyStickInformationProvider.cs" />

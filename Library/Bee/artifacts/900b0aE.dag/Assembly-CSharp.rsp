@@ -376,6 +376,7 @@
 "Assets/Scripts/Enemy/EnemyAnimationController.cs"
 "Assets/Scripts/Enemy/EnemyMover.cs"
 "Assets/Scripts/Enemy/EnemyStatesController.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Player/JoyStickInformationProvider.cs"
 "Assets/Scripts/Player/JumpLineSimulator.cs"
 "Assets/Scripts/Player/JumpTargetController.cs"

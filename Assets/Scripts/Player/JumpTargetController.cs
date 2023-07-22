@@ -1,5 +1,6 @@
 using UnityEngine;
 using UniRx;
+using System;
 
 public class JumpTargetController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class JumpTargetController : MonoBehaviour
             {
                 jumpTargetTransform.parent = transform;
 
+                jumpTargetTransform.localEulerAngles = Vector3.zero;
+
                 jumpTargetTransform.position = new Vector3(transform.position.x,
                                                              jumpTargetTransform.position.y,
                                                              transform.position.z);
@@ -67,12 +70,19 @@ public class JumpTargetController : MonoBehaviour
 
     void Update()
     {
+        MoveJumpTarget();
+
+        //Debug.Log("centerToNow:" + componentsProvider.joyStickInformationProvider.GetCenterToNowPointDistance());
+    }
+
+    private void MoveJumpTarget()
+    {
+        if (componentsProvider.playerStatesController.state
+            != PlayerStatesController.States.AimingJump) return;
+
         var nowDistance = joyStickInformationProvider.GetCenterToNowPointDistance();
 
-        if (beforeDistance == nowDistance)
-        {
-            return;
-        }
+        if (beforeDistance == nowDistance) return;
 
         isMinus = beforeDistance > nowDistance;
 
@@ -86,7 +96,5 @@ public class JumpTargetController : MonoBehaviour
             jumpTargetTransform.position -= direction * fixedMoveSpeed;
 
         beforeDistance = nowDistance;
-
-        //Debug.Log("centerToNow:" + componentsProvider.joyStickInformationProvider.GetCenterToNowPointDistance());
     }
 }

@@ -60,4 +60,12 @@ public class PlayerComponentsProvider : MonoBehaviour
     {
         get { return _joyStickInformationProvider; }
     }
+
+    [SerializeField]
+    private MeshRenderer _jumpTargetRenderer;
+
+    public MeshRenderer jumpTargetRenderer
+    {
+        get { return _jumpTargetRenderer; }
+    }
 }
