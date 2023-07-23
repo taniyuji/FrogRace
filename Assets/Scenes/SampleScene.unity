@@ -4639,8 +4639,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerComponentsProvider: {fileID: 306256204}
   moveSmoothness: 1
-  roteTolerateAmount: 0
-  zoomSpeed: 40
+  adjustSpeedAmount: 8
+  tolerateMinSpeed: 40
+  afterJumpResetSpeed: 150
 --- !u!4 &526526656
 Transform:
   m_ObjectHideFlags: 0

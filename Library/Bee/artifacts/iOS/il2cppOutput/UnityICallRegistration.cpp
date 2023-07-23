@@ -594,6 +594,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Camera_WorldToScreenPoint_Injected();
 		Register_UnityEngine_Camera_WorldToScreenPoint_Injected();
 
+		//System.Void UnityEngine.Camera::WorldToViewportPoint_Injected(UnityEngine.Vector3&,UnityEngine.Camera/MonoOrStereoscopicEye,UnityEngine.Vector3&)
+		void Register_UnityEngine_Camera_WorldToViewportPoint_Injected();
+		Register_UnityEngine_Camera_WorldToViewportPoint_Injected();
+
 		//System.Void UnityEngine.Camera::get_backgroundColor_Injected(UnityEngine.Color&)
 		void Register_UnityEngine_Camera_get_backgroundColor_Injected();
 		Register_UnityEngine_Camera_get_backgroundColor_Injected();
@@ -2630,6 +2634,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Physics_get_gravity_Injected();
 		Register_UnityEngine_Physics_get_gravity_Injected();
 
+		//System.Void UnityEngine.Physics::set_gravity_Injected(UnityEngine.Vector3&)
+		void Register_UnityEngine_Physics_set_gravity_Injected();
+		Register_UnityEngine_Physics_set_gravity_Injected();
+
 		//UnityEngine.Collider UnityEngine.Physics::GetColliderByInstanceID(System.Int32)
 		void Register_UnityEngine_Physics_GetColliderByInstanceID();
 		Register_UnityEngine_Physics_GetColliderByInstanceID();
@@ -3177,6 +3185,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Renderer::SetMaterial(UnityEngine.Material)
 		void Register_UnityEngine_Renderer_SetMaterial();
 		Register_UnityEngine_Renderer_SetMaterial();
+
+		//System.Void UnityEngine.Renderer::get_bounds_Injected(UnityEngine.Bounds&)
+		void Register_UnityEngine_Renderer_get_bounds_Injected();
+		Register_UnityEngine_Renderer_get_bounds_Injected();
 
 		//System.Void UnityEngine.Renderer::set_enabled(System.Boolean)
 		void Register_UnityEngine_Renderer_set_enabled();

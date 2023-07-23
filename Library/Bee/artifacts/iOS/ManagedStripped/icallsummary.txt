@@ -117,6 +117,7 @@ UnityEngine.Camera::ScreenPointToRay_Injected
 UnityEngine.Camera::ScreenToViewportPoint_Injected
 UnityEngine.Camera::SetupCurrent
 UnityEngine.Camera::WorldToScreenPoint_Injected
+UnityEngine.Camera::WorldToViewportPoint_Injected
 UnityEngine.Camera::get_backgroundColor_Injected
 UnityEngine.Camera::get_lensShift_Injected
 UnityEngine.Camera::get_pixelRect_Injected
@@ -568,6 +569,7 @@ UnityEngine.Physics::SendOnCollisionExit
 UnityEngine.Physics::SendOnCollisionStay
 UnityEngine.Physics::get_defaultPhysicsScene_Injected
 UnityEngine.Physics::get_gravity_Injected
+UnityEngine.Physics::set_gravity_Injected
 UnityEngine.Physics::GetColliderByInstanceID
 UnityEngine.Physics::GetBodyByInstanceID
 UnityEngine.Physics::Internal_RaycastAll_Injected
@@ -687,6 +689,7 @@ UnityEngine.Renderer::get_sortingGroupOrder
 UnityEngine.Renderer::get_sortingLayerID
 UnityEngine.Renderer::get_sortingOrder
 UnityEngine.Renderer::SetMaterial
+UnityEngine.Renderer::get_bounds_Injected
 UnityEngine.Renderer::set_enabled
 UnityEngine.Renderer::set_receiveShadows
 UnityEngine.Renderer::set_shadowCastingMode

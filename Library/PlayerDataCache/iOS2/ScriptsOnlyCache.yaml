@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CameraMover
     - FloatingJoystick
+    - GameManager
     - JoyStickInformationProvider
     - JumpLineSimulator
     - JumpTargetController
@@ -132,33 +133,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 18738}
     - Class: 114
-      Script: {instanceID: 19510}
+      Script: {instanceID: 18744}
     - Class: 114
-      Script: {instanceID: 19778}
+      Script: {instanceID: 19170}
     - Class: 114
-      Script: {instanceID: 19822}
+      Script: {instanceID: 19514}
     - Class: 114
-      Script: {instanceID: 20168}
+      Script: {instanceID: 19782}
     - Class: 114
-      Script: {instanceID: 20654}
+      Script: {instanceID: 19826}
     - Class: 114
-      Script: {instanceID: 20910}
+      Script: {instanceID: 20172}
     - Class: 114
-      Script: {instanceID: 21294}
+      Script: {instanceID: 20658}
     - Class: 114
-      Script: {instanceID: 21468}
+      Script: {instanceID: 20914}
     - Class: 114
-      Script: {instanceID: 21516}
+      Script: {instanceID: 21298}
     - Class: 114
-      Script: {instanceID: 21728}
+      Script: {instanceID: 21472}
     - Class: 114
-      Script: {instanceID: 21838}
+      Script: {instanceID: 21520}
     - Class: 114
-      Script: {instanceID: 22216}
+      Script: {instanceID: 21732}
     - Class: 114
-      Script: {instanceID: 22674}
+      Script: {instanceID: 21842}
     - Class: 114
-      Script: {instanceID: 25830}
+      Script: {instanceID: 22220}
+    - Class: 114
+      Script: {instanceID: 22678}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -372,7 +375,7 @@ ScriptsOnlyBuild:
     className: ObservableDropTrigger
   - hash:
       serializedVersion: 2
-      Hash: 267e52100ae96c9753da0b5f03b51e13
+      Hash: 13ac0493fc9443e472a6c314b2b4f23b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: CameraMover
@@ -432,7 +435,7 @@ ScriptsOnlyBuild:
     className: UnityMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 019e30dbb8cc166f9acb9a36d72915d3
+      Hash: c90c9e2e34e4848afccc94351476dec3
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: PlayerComponentsProvider
@@ -654,6 +657,12 @@ ScriptsOnlyBuild:
     className: DOTweenSettings
   - hash:
       serializedVersion: 2
+      Hash: 326311561ade266ae0828337cf3618d8
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
       Hash: 751e5bae2a317288c2ab58d66687092b
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.EventSystems
@@ -724,6 +733,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnPointerExitMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 7c09c82c24509298dec6ea9879acb4ca
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: JoyStickInformationProvider
   - hash:
       serializedVersion: 2
       Hash: b18151310f999106767addd7177d1a99
@@ -1648,12 +1663,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 7c09c82c24509298dec6ea9879acb4ca
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: JoyStickInformationProvider
   platform: 9
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

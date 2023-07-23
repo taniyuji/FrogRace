@@ -10,42 +10,48 @@ public class CameraMover : MonoBehaviour
     private float moveSmoothness;
 
     [SerializeField]
-    private float roteTolerateAmount;
+    private float adjustSpeedAmount;
 
     [SerializeField]
-    private float zoomSpeed;
+    private float tolerateMinSpeed;
+
+    [SerializeField]
+    private float afterJumpResetSpeed;
 
     private PlayerStatesController statesController;
 
     private enum States
     {
         Nothing,
+        FollowingAndResetting,
         Following,
         CanZoom,
-        ZoomingIn,
-        ZoomingOut,
+        CanNotZoom,
     }
 
     private States state = States.Following;
 
     private Vector3 beforePlayerPosition;
 
-    private Vector3 defaultCameraPosition;
+    private float defaultPlayerToCameraDistance;
 
     private Vector3 zoomVector;
-
-    private float playerBeforeYRote;
 
     private bool isAdjustRote = false;
 
     private Vector3 beforeTargetPosition;
+
+    private float maxZoomOutSpeed;
+
+    private float beforeSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         statesController = playerComponentsProvider.playerStatesController;
 
-        defaultCameraPosition = transform.position;
+        defaultPlayerToCameraDistance
+         = Vector3.Distance(playerComponentsProvider.transform.position, transform.position);
 
         zoomVector
          = (playerComponentsProvider.transform.position - transform.position).normalized;
@@ -58,7 +64,7 @@ public class CameraMover : MonoBehaviour
             }
             else if (i == PlayerStatesController.States.Jumping)
             {
-                state = States.Following;
+                state = States.FollowingAndResetting;
             }
             else if (i == PlayerStatesController.States.Idle)
             {
@@ -76,12 +82,13 @@ public class CameraMover : MonoBehaviour
     private void Update()
     {
         FollowBehavior();
-        ZoomOutBehavior();
+        ZoomBehavior();
+        ResetCameraDistance();
     }
 
     private void FollowBehavior()
     {
-        if (state != States.Following) return;
+        if (state != States.Following && state != States.FollowingAndResetting) return;
 
         var playerPosDif = playerComponentsProvider.transform.position - beforePlayerPosition;
 
@@ -94,31 +101,60 @@ public class CameraMover : MonoBehaviour
         beforePlayerPosition = playerComponentsProvider.transform.position;
     }
 
-    private void ZoomOutBehavior()
+    private void ResetCameraDistance()
+    {
+        if (state != States.FollowingAndResetting) return;
+
+        if (Vector3.Distance(playerComponentsProvider.transform.position, transform.position)
+           <= defaultPlayerToCameraDistance)
+        {
+            state = States.Following;
+            return;
+        }
+
+        var targetPosition = transform.position + (afterJumpResetSpeed * Time.deltaTime * zoomVector);
+
+        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmoothness);
+    }
+
+    private void ZoomBehavior()
     {
         if (state != States.CanZoom) return;
 
-        if (IsBoundsInView(Camera.main, playerComponentsProvider.jumpTargetRenderer)) return;
+        var fixedZoomVector = zoomVector;
 
-        //if (playerComponentsProvider.jumpTargetRenderer.isVisible) return;
+        var vertices = GetBoundsVertices(playerComponentsProvider.jumpTargetRenderer);
 
-        Debug.Log("ZoomingOut");
+        var fixedZoomSpeed = 0f;
 
-        var targetPosition = transform.position + (zoomSpeed * Time.deltaTime * -zoomVector);
+        if (IsBoundsInView(Camera.main, vertices))
+        {
+            if (Vector3.Distance(playerComponentsProvider.transform.position, transform.position)
+                <= defaultPlayerToCameraDistance) return;
+
+            fixedZoomSpeed = CalculateZoomingSpeed(vertices, true);
+            //Debug.Log("ZoomingIn");
+        }
+        else
+        {
+            fixedZoomVector *= -1;
+
+            fixedZoomSpeed = CalculateZoomingSpeed(vertices, false);
+            //Debug.Log("ZoomingOut");
+        }
+
+        Debug.Log(fixedZoomSpeed);
+        if (fixedZoomSpeed < tolerateMinSpeed) return;
+
+        var targetPosition = transform.position + (fixedZoomSpeed * Time.deltaTime * fixedZoomVector);
+        Debug.Log(fixedZoomSpeed);
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmoothness);
 
         beforeTargetPosition = playerComponentsProvider.jumpTargetRenderer.transform.position;
     }
 
-    private void ZoomInBehavior()
-    {
-        var targetPosition = Vector3.MoveTowards(transform.position, defaultCameraPosition, 1);
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmoothness);
-    }
-
-    public bool IsBoundsInView(Camera camera, Renderer renderer)
+    private Vector3[] GetBoundsVertices(Renderer renderer)
     {
         Vector3[] vertices = new Vector3[8];
         Bounds bounds = renderer.bounds;
@@ -133,6 +169,11 @@ public class CameraMover : MonoBehaviour
         vertices[6] = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
         vertices[7] = bounds.max;
 
+        return vertices;
+    }
+
+    public bool IsBoundsInView(Camera camera, Vector3[] vertices)
+    {
         // Check each vertex to see if it's inside the camera's view
         for (int i = 0; i < vertices.Length; i++)
         {
@@ -145,6 +186,59 @@ public class CameraMover : MonoBehaviour
         }
 
         return true;
+    }
+
+    private float CalculateZoomingSpeed(Vector3[] vertices, bool isBoundsInView)
+    {
+        //zoomOutが開始されたら逐次maxZoomOutSpeedを更新
+        //全てのboundsが画面内に入って初めてmaxZoomOutSpeedを初期化
+        var speedAmount = 0.0f;
+
+        if (isBoundsInView)
+        {
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                Vector3 v = Camera.main.WorldToViewportPoint(vertices[i]);
+
+                //画面の右半分、横半分どのポジションでも0~1の値を返す
+                var fixedVertices
+                     = new Vector2(v.x > 0.5f ? 1 - v.x : v.x, v.y > 0.5f ? 1 - v.y : 0.5f) * 10;
+
+                speedAmount += fixedVertices.x;
+            }
+
+            maxZoomOutSpeed = 0;
+        }
+        else
+        {
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                Vector3 v = Camera.main.WorldToViewportPoint(vertices[i]);
+
+                var fixedVertices
+                   = new Vector2(Mathf.Abs(v.x) % 10, Mathf.Abs(v.y) % 10) * 10;
+
+                if (0 <= v.x && v.x <= 1)
+                {
+                    fixedVertices.x = 0;
+                }
+                else if (0 <= v.y && v.y <= 1)
+                {
+                    fixedVertices.y = 0;
+                }
+
+                speedAmount += fixedVertices.x > fixedVertices.y
+                    ? fixedVertices.x : fixedVertices.y;
+            }
+
+            if (maxZoomOutSpeed < speedAmount)
+                maxZoomOutSpeed = speedAmount;
+            else
+                speedAmount = maxZoomOutSpeed;
+        }
+
+        //Debug.Log("SpeedAmount:" + speedAmount);
+        return speedAmount * adjustSpeedAmount;
     }
 
     /*
