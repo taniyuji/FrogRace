@@ -37,13 +37,8 @@ public class CameraMover : MonoBehaviour
 
     private Vector3 zoomVector;
 
-    private bool isAdjustRote = false;
-
-    private Vector3 beforeTargetPosition;
-
     private float maxZoomOutSpeed;
 
-    private float beforeSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +63,7 @@ public class CameraMover : MonoBehaviour
             }
             else if (i == PlayerStatesController.States.Idle)
             {
-                isAdjustRote = true;
+
             }
             else if (i == PlayerStatesController.States.GameOver)
             {
@@ -143,15 +138,13 @@ public class CameraMover : MonoBehaviour
             //Debug.Log("ZoomingOut");
         }
 
-        Debug.Log(fixedZoomSpeed);
+        //Debug.Log(fixedZoomSpeed);
         if (fixedZoomSpeed < tolerateMinSpeed) return;
 
         var targetPosition = transform.position + (fixedZoomSpeed * Time.deltaTime * fixedZoomVector);
-        Debug.Log(fixedZoomSpeed);
+        //Debug.Log(fixedZoomSpeed);
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSmoothness);
-
-        beforeTargetPosition = playerComponentsProvider.jumpTargetRenderer.transform.position;
     }
 
     private Vector3[] GetBoundsVertices(Renderer renderer)

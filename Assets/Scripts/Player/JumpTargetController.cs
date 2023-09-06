@@ -13,6 +13,9 @@ public class JumpTargetController : MonoBehaviour
     [SerializeField]
     private float maxDistance = 5;
 
+    [SerializeField]
+    private JumpTargetCollisionDetector collisionDetector;
+
     private PlayerComponentsProvider componentsProvider;
 
     private JoyStickInformationProvider joyStickInformationProvider;
@@ -42,7 +45,7 @@ public class JumpTargetController : MonoBehaviour
                 jumpTargetTransform.localEulerAngles = Vector3.zero;
 
                 jumpTargetTransform.position = new Vector3(transform.position.x,
-                                                             jumpTargetTransform.position.y,
+                                                             transform.position.y,
                                                              transform.position.z);
                 isMinus = false;
                 beforeDistance = 0;
@@ -81,8 +84,16 @@ public class JumpTargetController : MonoBehaviour
             != PlayerStatesController.States.AimingJump) return;
 
         var nowDistance = joyStickInformationProvider.GetCenterToNowPointDistance();
+        //Debug.Log(nowDistance);
 
-        if (beforeDistance == nowDistance) return;
+        if (beforeDistance == nowDistance)
+        {
+            jumpTargetTransform.position
+            = new Vector3(jumpTargetTransform.position.x,
+                          collisionDetector.fixedYPosition,
+                          jumpTargetTransform.position.z);
+            return;
+        }
 
         isMinus = beforeDistance > nowDistance;
 
@@ -94,6 +105,11 @@ public class JumpTargetController : MonoBehaviour
             jumpTargetTransform.position = beforeJumpCenterPosition + direction * fixedMoveSpeed;
         else
             jumpTargetTransform.position -= direction * fixedMoveSpeed;
+
+        jumpTargetTransform.position
+            = new Vector3(jumpTargetTransform.position.x,
+                          collisionDetector.fixedYPosition,
+                          jumpTargetTransform.position.z);
 
         beforeDistance = nowDistance;
     }

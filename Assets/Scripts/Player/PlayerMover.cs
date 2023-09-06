@@ -96,7 +96,7 @@ public class PlayerMover : MonoBehaviour
             != PlayerStatesController.States.AimingJump)
             return;
 
-        var roteDirection = (Input.mousePosition - joyStickInformationProvider.firstInput.Value);
+        var roteDirection = Input.mousePosition - joyStickInformationProvider.firstInput.Value;
 
         var angle = Mathf.Atan2(roteDirection.x, roteDirection.y) * Mathf.Rad2Deg;
 

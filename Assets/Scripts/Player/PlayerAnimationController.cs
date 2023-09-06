@@ -17,6 +17,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private Tweener dribbleTweener;
 
+
     private PlayerComponentsProvider componentsProvider;
 
     private MeshRenderer meshRenderer;
@@ -28,23 +29,23 @@ public class PlayerAnimationController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         meshRenderer = componentsProvider.meshRenderer;
 
         componentsProvider.playerStatesController.stateChanged.Subscribe(i =>
-        {            
-            if(i == PlayerStatesController.States.Idle)
+        {
+            if (i == PlayerStatesController.States.Idle)
             {
                 Debug.Log("DrribleAgain");
 
-                playDribbleAnimation();                              
+                playDribbleAnimation();
             }
-            else if(i == PlayerStatesController.States.GameOver)
+            else if (i == PlayerStatesController.States.GameOver)
             {
                 meshRenderer.gameObject.SetActive(false);
             }
             else
-            {               
+            {
                 dribbleTweener.Kill();
                 meshRenderer.transform.localPosition = Vector3.zero;
             }
@@ -55,10 +56,10 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     private void playDribbleAnimation()
-    {               
-        dribbleTweener = (meshRenderer.transform
+    {
+        dribbleTweener = meshRenderer.transform
                                .DOLocalMove(new Vector3(0, dribbleYPosition, 0), boundSpeed)
-                               .SetLoops(-1, LoopType.Yoyo))
-                               .SetEase(Ease.InSine);        
+                               .SetLoops(-1, LoopType.Yoyo)
+                               .SetEase(Ease.InSine);
     }
 }

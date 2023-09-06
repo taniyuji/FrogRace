@@ -32,7 +32,7 @@ public class JumpLineSimulator : MonoBehaviour
     [SerializeField]
     private float guidesInterval = -3f;
 
-    private List<GameObject> guideList = new List<GameObject>();
+    public List<JumpGuideCollisionDetector> guidesCollisionDetectorList { get; private set; } = new List<JumpGuideCollisionDetector>();
 
     private PlayerComponentsProvider componentsProvider;
 
@@ -44,13 +44,15 @@ public class JumpLineSimulator : MonoBehaviour
     private void Start()
     {
         for (int i = 0; i < guideAmount; i++)
-        {            
-            guideList.Add(Instantiate(throwingRigidBody.gameObject, guidesParent.transform)) ;
+        {
+            var guide = Instantiate(throwingRigidBody.gameObject, guidesParent.transform);
+
+            guidesCollisionDetectorList.Add(guide.GetComponent<JumpGuideCollisionDetector>());
         }
 
         componentsProvider.playerStatesController.stateChanged.Subscribe(i =>
-        {                            
-            if(i == PlayerStatesController.States.AimingJump)
+        {
+            if (i == PlayerStatesController.States.AimingJump)
                 guidesParent.gameObject.SetActive(true);
             else
                 guidesParent.gameObject.SetActive(false);
@@ -87,8 +89,8 @@ public class JumpLineSimulator : MonoBehaviour
             }
             else
             {
-                guideList[i].gameObject.SetActive(true);
-                guideList[i].transform.position = expectedPosition;
+                guidesCollisionDetectorList[i].gameObject.SetActive(true);
+                guidesCollisionDetectorList[i].transform.position = expectedPosition;
             }
         }
     }
@@ -176,7 +178,7 @@ public class JumpLineSimulator : MonoBehaviour
         }
         else
         {
-            return (new Vector3(pointB.x - pointA.x, z * Mathf.Tan(rad), pointB.z - pointA.z).normalized * speed);
+            return new Vector3(pointB.x - pointA.x, z * Mathf.Tan(rad), pointB.z - pointA.z).normalized * speed;
         }
     }
 }
