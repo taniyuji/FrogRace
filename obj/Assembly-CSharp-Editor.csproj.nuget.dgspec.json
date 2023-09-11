@@ -38,6 +38,9 @@
               "/Volumes/mac/Unity/Projects/FrogRace/com.unity.cinemachine.editor.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/com.unity.cinemachine.editor.csproj"
               },
+              "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj"
+              },
               "/Volumes/mac/Unity/Projects/FrogRace/UniRx.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UniRx.csproj"
               },
@@ -179,6 +182,9 @@
               "/Volumes/mac/Unity/Projects/FrogRace/com.unity.cinemachine.editor.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/com.unity.cinemachine.editor.csproj"
               },
+              "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj"
+              },
               "/Volumes/mac/Unity/Projects/FrogRace/UniRx.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UniRx.csproj"
               },
@@ -316,6 +322,9 @@
               },
               "/Volumes/mac/Unity/Projects/FrogRace/com.unity.cinemachine.editor.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/com.unity.cinemachine.editor.csproj"
+              },
+              "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj"
               },
               "/Volumes/mac/Unity/Projects/FrogRace/UniRx.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UniRx.csproj"
@@ -512,6 +521,66 @@
               "/Volumes/mac/Unity/Projects/FrogRace/Unity.Timeline.Editor.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/Unity.Timeline.Editor.csproj"
               },
+              "/Volumes/mac/Unity/Projects/FrogRace/UnityEditor.TestRunner.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UnityEditor.TestRunner.csproj"
+              },
+              "/Volumes/mac/Unity/Projects/FrogRace/UnityEditor.UI.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UnityEditor.UI.csproj"
+              },
+              "/Volumes/mac/Unity/Projects/FrogRace/UnityEngine.TestRunner.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UnityEngine.TestRunner.csproj"
+              },
+              "/Volumes/mac/Unity/Projects/FrogRace/UnityEngine.UI.csproj": {
+                "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UnityEngine.UI.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj",
+        "projectName": "JfranMora.EditorExtensions.CompileBeforePlay",
+        "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/JfranMora.EditorExtensions.CompileBeforePlay.csproj",
+        "packagesPath": "/Users/tanikawayuji/.nuget/packages/",
+        "outputPath": "/Volumes/mac/Unity/Projects/FrogRace/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/tanikawayuji/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
               "/Volumes/mac/Unity/Projects/FrogRace/UnityEditor.TestRunner.csproj": {
                 "projectPath": "/Volumes/mac/Unity/Projects/FrogRace/UnityEditor.TestRunner.csproj"
               },

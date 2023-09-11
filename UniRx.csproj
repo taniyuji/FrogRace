@@ -162,8 +162,8 @@
     <Compile Include="Assets/Plugins/UniRx/Scripts/Subjects/ReplaySubject.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableTriggerExtensions.Component.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Observable.Joins.cs" />
-    <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableEventTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Observable.ErrorHandling.cs" />
+    <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableEventTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Operators/ThrottleFirstFrame.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/Aggregate.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Notifiers/ScheduledNotifier.cs" />

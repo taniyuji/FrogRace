@@ -39,7 +39,6 @@ public class CameraMover : MonoBehaviour
 
     private float maxZoomOutSpeed;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +78,17 @@ public class CameraMover : MonoBehaviour
         FollowBehavior();
         ZoomBehavior();
         ResetCameraDistance();
+        /*
+        if (state != States.CanZoom) return;
+
+        var roteYDiff = playerComponentsProvider.transform.localEulerAngles.y - transform.localEulerAngles.y;
+
+        if (Mathf.Abs(roteYDiff) > 90) roteYDiff = roteYDiff > 0 ? roteYDiff - 360 : roteYDiff + 360;
+
+        Debug.Log(roteYDiff);
+
+        transform.RotateAround(playerComponentsProvider.transform.position, Vector3.up, roteYDiff * 0.01f);
+        */
     }
 
     private void FollowBehavior()

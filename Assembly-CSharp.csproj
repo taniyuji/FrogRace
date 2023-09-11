@@ -57,28 +57,29 @@
   <ItemGroup>
     <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/FixedJoystick.cs" />
     <Compile Include="Assets/Scripts/Enemy/EnemyAnimationController.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerFunctions/PlayerComponentsProvider.cs" />
     <Compile Include="Assets/Scripts/Enemy/EnemyStatesController.cs" />
     <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs" />
-    <Compile Include="Assets/Scripts/Player/PlayerStatesController.cs" />
-    <Compile Include="Assets/Scripts/Player/PlayerMover.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerFunctions/PlayerAnimationController.cs" />
+    <Compile Include="Assets/Scripts/Player/JumpGuide/JumpLineSimulator.cs" />
+    <Compile Include="Assets/Scripts/Player/JumpGuide/JumpTargetCollisionDetector.cs" />
     <Compile Include="Assets/Joystick Pack/Examples/JoystickSetterExample.cs" />
-    <Compile Include="Assets/Scripts/Player/PlayerComponentsProvider.cs" />
+    <Compile Include="Assets/Scripts/Player/JumpGuide/JumpGuideLineRenderer.cs" />
     <Compile Include="Assets/Scripts/ResetButton.cs" />
-    <Compile Include="Assets/Scripts/Player/PlayerAnimationController.cs" />
-    <Compile Include="Assets/Scripts/Player/JumpTargetController.cs" />
     <Compile Include="Assets/Scripts/GameManager.cs" />
     <Compile Include="Assets/Scripts/Enemy/EnemyMover.cs" />
     <Compile Include="Assets/Scripts/CameraMover.cs" />
     <Compile Include="Assets/Scripts/Player/JoyStickInformationProvider.cs" />
-    <Compile Include="Assets/Scripts/Player/JumpGuideCollitionController.cs" />
+    <Compile Include="Assets/Scripts/Player/JumpGuide/JumpGuideCollitionController.cs" />
     <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/FloatingJoystick.cs" />
+    <Compile Include="Assets/Scripts/Player/JumpGuide/JumpGuideCollisionDetector.cs" />
     <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/DynamicJoystick.cs" />
-    <Compile Include="Assets/Scripts/Player/JumpTargetCollisionDetector.cs" />
-    <Compile Include="Assets/Scripts/Player/JumpGuideCollisionDetector.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerFunctions/PlayerStatesController.cs" />
+    <Compile Include="Assets/Scripts/Player/JumpGuide/JumpTargetController.cs" />
     <Compile Include="Assets/Joystick Pack/Scripts/Base/Joystick.cs" />
-    <Compile Include="Assets/Scripts/Player/PlayerCollitionDetector.cs" />
-    <Compile Include="Assets/Scripts/Player/JumpLineSimulator.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerFunctions/PlayerMover.cs" />
     <Compile Include="Assets/Joystick Pack/Examples/JoystickPlayerExample.cs" />
+    <Compile Include="Assets/Scripts/Player/PlayerFunctions/PlayerCollitionDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
