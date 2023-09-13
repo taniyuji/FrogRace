@@ -8,6 +8,9 @@ public class JumpGuideLineRenderer : MonoBehaviour
     [SerializeField]
     private PlayerComponentsProvider componentsProvider;
 
+    [SerializeField]
+    private List<Material> materials;
+
     private LineRenderer lineRenderer;
 
     private List<Vector3> linePositions = new List<Vector3>();
@@ -15,13 +18,6 @@ public class JumpGuideLineRenderer : MonoBehaviour
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-
     }
 
     // Update is called once per frame
@@ -45,6 +41,25 @@ public class JumpGuideLineRenderer : MonoBehaviour
         lineRenderer.positionCount = linePositions.Count;
 
         lineRenderer.SetPositions(linePositions.ToArray());
-        Debug.Log("SetLinePositions" + lineRenderer.positionCount);
+        //Debug.Log("SetLinePositions" + lineRenderer.positionCount);
+
+        ChangeMaterial();
+    }
+
+    private void ChangeMaterial()
+    {
+        Debug.Log(componentsProvider.jumpTargetCollisionDetector.isOnGround);
+
+
+        if (componentsProvider.jumpTargetCollisionDetector.isOnGround)
+        {
+            Debug.Log("SetGreen");
+            lineRenderer.material = materials[0];
+        }
+        else if (!componentsProvider.jumpTargetCollisionDetector.isOnGround)
+        {
+            Debug.Log("SetRed");
+            lineRenderer.material = materials[1];
+        }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+kfMpUmm/EPxR+QNSvys0sHN3ofZ7Y+K1QwH1nJqP0aiCWCGHWaai7Zlk4LKOaCu1vpfjlsMjS6DdZ/RWwx5OQ==",
+  "dgSpecHash": "RnMp+hU/cuhTyMlf1VTh8AK9z+67AbUP2H++8UgZhMD/2QyfJQjtS5Daj6hqO9gbbZ7EJ8FPWQ/z06HXjfxLjg==",
   "success": true,
-  "projectFilePath": "/Volumes/mac/Unity/Projects/FrogRace/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.csproj",
+  "projectFilePath": "/Volumes/mac/Unity/Projects/FrogRace/Assembly-CSharp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

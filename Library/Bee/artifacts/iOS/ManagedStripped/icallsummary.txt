@@ -434,7 +434,9 @@ UnityEngine.Light::set_shadowStrength
 UnityEngine.Light::get_shadows
 UnityEngine.Light::get_type
 UnityEngine.Light::get_cookie
+UnityEngine.LineRenderer::SetPositions
 UnityEngine.LineRenderer::set_endColor_Injected
+UnityEngine.LineRenderer::set_positionCount
 UnityEngine.LineRenderer::set_startColor_Injected
 UnityEngine.Material::HasProperty
 UnityEngine.Material::SetPass
@@ -571,6 +573,7 @@ UnityEngine.Physics::get_defaultPhysicsScene_Injected
 UnityEngine.Physics::get_gravity_Injected
 UnityEngine.Physics::set_gravity_Injected
 UnityEngine.Physics::GetColliderByInstanceID
+UnityEngine.Physics::OverlapSphere_Internal_Injected
 UnityEngine.Physics::GetBodyByInstanceID
 UnityEngine.Physics::Internal_RaycastAll_Injected
 UnityEngine.Physics2D::get_queriesHitTriggers

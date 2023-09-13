@@ -13,6 +13,7 @@ public class JumpTargetCollisionDetector : MonoBehaviour
 
     private bool canSearch = false;
 
+    public bool isOnGround = false;
 
     void Start()
     {
@@ -28,6 +29,8 @@ public class JumpTargetCollisionDetector : MonoBehaviour
         if (!canSearch) return;
 
         fixedYPosition = CastRayAndGetGroundYPosition();
+
+
     }
 
     private float CastRayAndGetGroundYPosition()
@@ -36,6 +39,7 @@ public class JumpTargetCollisionDetector : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitAbove) && hitAbove.collider.CompareTag("Ground"))
         {
+            isOnGround = true;
             //Debug.Log("hitAbove");
             return hitAbove.transform.position.y
                  + hitAbove.transform.localScale.y / 2;
@@ -44,6 +48,8 @@ public class JumpTargetCollisionDetector : MonoBehaviour
         {
             if (hitColliders.Length == 1)
             {
+                isOnGround = true;
+
                 //Debug.Log("overlapDetected");
                 return hitColliders[0].transform.position.y
                      + hitColliders[0].transform.localScale.y / 2;
@@ -59,6 +65,8 @@ public class JumpTargetCollisionDetector : MonoBehaviour
 
             //Debug.Log("overlapDetected");
 
+            isOnGround = true;
+
             return highestCollider.transform.position.y
                  + highestCollider.transform.localScale.y / 2;
 
@@ -69,12 +77,16 @@ public class JumpTargetCollisionDetector : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hitBelow) && hitBelow.collider.CompareTag("Ground"))
             {
+                isOnGround = true;
+
                 //Debug.Log("hitBelow");
                 return hitBelow.transform.position.y
                      + hitBelow.transform.localScale.y / 2;
             }
 
             //Debug.Log("hitNothing");
+
+            isOnGround = false;
             return fixedYPosition;
         }
     }

@@ -38,11 +38,11 @@ public class PlayerComponentsProvider : MonoBehaviour
     }
 
     [SerializeField]
-    private Transform _animationTransform;
+    private Transform _meshTransform;
 
-    public Transform animationTransform
+    public Transform meshTransform
     {
-        get { return _animationTransform; }
+        get { return _meshTransform; }
     }
 
     [SerializeField]
@@ -67,5 +67,13 @@ public class PlayerComponentsProvider : MonoBehaviour
     public MeshRenderer jumpTargetRenderer
     {
         get { return _jumpTargetRenderer; }
+    }
+
+    [SerializeField]
+    private JumpTargetCollisionDetector _jumpTargetCollisionDetector;
+
+    public JumpTargetCollisionDetector jumpTargetCollisionDetector
+    {
+        get { return _jumpTargetCollisionDetector; }
     }
 }

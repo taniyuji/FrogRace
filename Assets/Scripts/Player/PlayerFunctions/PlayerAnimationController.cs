@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UniRx;
+using DG.Tweening;
 
 public class PlayerAnimationController : MonoBehaviour
 {
@@ -10,19 +11,18 @@ public class PlayerAnimationController : MonoBehaviour
     private float shakeStrength = 10;
 
     [SerializeField]
-    private float moveYPosition;
+    private int shakeVibrato = 10;
 
     [SerializeField]
-    private float moveYSpeed;
-
-    private Tweener dribbleTweener;
-
+    private float shakeRandomness = 10;
 
     private PlayerComponentsProvider componentsProvider;
 
-    private Transform animationTransform;
+    private Transform meshTransform;
 
     private Animator playerAnimator;
+
+    private Tweener shakeTweener;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class PlayerAnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animationTransform = componentsProvider.animationTransform;
+        meshTransform = componentsProvider.meshTransform;
         playerAnimator = componentsProvider.animator;
 
         componentsProvider.playerStatesController.stateChanged.Subscribe(i =>
@@ -47,18 +47,17 @@ public class PlayerAnimationController : MonoBehaviour
             {
                 floatingAnimation();
             }
-            else if(i == PlayerStatesController.States.Land)
+            else if (i == PlayerStatesController.States.Land)
             {
-
+                LandingAnimation();
             }
             else if (i == PlayerStatesController.States.GameOver)
             {
-                animationTransform.gameObject.SetActive(false);
+                meshTransform.gameObject.SetActive(false);
             }
             else
             {
-                dribbleTweener.Kill();
-                animationTransform.transform.localPosition = new Vector3(0, transform.localScale.y / 2, 0);
+                meshTransform.transform.localPosition = new Vector3(0, transform.localScale.y / 2, 0);
             }
 
         });
@@ -67,10 +66,23 @@ public class PlayerAnimationController : MonoBehaviour
     private void crouchAnimation()
     {
         playerAnimator.SetTrigger("Crouch");
+
+        shakeTweener = meshTransform.DOShakePosition(1, shakeStrength, shakeVibrato, shakeRandomness, false, false)
+                                    .SetLoops(-1)
+                                    .SetEase(Ease.Linear);
     }
 
     private void floatingAnimation()
     {
         playerAnimator.SetTrigger("Floating");
+
+        shakeTweener.Kill();
+    }
+
+    private void LandingAnimation()
+    {
+        playerAnimator.SetTrigger("Landing");
+
+        componentsProvider.playerStatesController.ChangeState(PlayerStatesController.States.Idle);
     }
 }

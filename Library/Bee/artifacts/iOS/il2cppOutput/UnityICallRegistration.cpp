@@ -2018,9 +2018,17 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.LineRenderer
 
+		//System.Void UnityEngine.LineRenderer::SetPositions(UnityEngine.Vector3[])
+		void Register_UnityEngine_LineRenderer_SetPositions();
+		Register_UnityEngine_LineRenderer_SetPositions();
+
 		//System.Void UnityEngine.LineRenderer::set_endColor_Injected(UnityEngine.Color&)
 		void Register_UnityEngine_LineRenderer_set_endColor_Injected();
 		Register_UnityEngine_LineRenderer_set_endColor_Injected();
+
+		//System.Void UnityEngine.LineRenderer::set_positionCount(System.Int32)
+		void Register_UnityEngine_LineRenderer_set_positionCount();
+		Register_UnityEngine_LineRenderer_set_positionCount();
 
 		//System.Void UnityEngine.LineRenderer::set_startColor_Injected(UnityEngine.Color&)
 		void Register_UnityEngine_LineRenderer_set_startColor_Injected();
@@ -2641,6 +2649,10 @@ void RegisterAllStrippedInternalCalls()
 		//UnityEngine.Collider UnityEngine.Physics::GetColliderByInstanceID(System.Int32)
 		void Register_UnityEngine_Physics_GetColliderByInstanceID();
 		Register_UnityEngine_Physics_GetColliderByInstanceID();
+
+		//UnityEngine.Collider[] UnityEngine.Physics::OverlapSphere_Internal_Injected(UnityEngine.PhysicsScene&,UnityEngine.Vector3&,System.Single,System.Int32,UnityEngine.QueryTriggerInteraction)
+		void Register_UnityEngine_Physics_OverlapSphere_Internal_Injected();
+		Register_UnityEngine_Physics_OverlapSphere_Internal_Injected();
 
 		//UnityEngine.Component UnityEngine.Physics::GetBodyByInstanceID(System.Int32)
 		void Register_UnityEngine_Physics_GetBodyByInstanceID();
